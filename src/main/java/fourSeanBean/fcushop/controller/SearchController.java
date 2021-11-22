@@ -16,7 +16,7 @@ public class SearchController {
     ProductService productManager;
 
     @GetMapping("/search/{name}")
-    public List<Product> searchProduct(@PathVariable String name){
+    public List<Product> searchProduct(@PathVariable String name) {
         return productManager.searchProduct(name);
     }
 }
