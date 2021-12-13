@@ -30,6 +30,16 @@ class _MyAppState extends State<MyApp> {
         "https://fs1.shop123.com.tw/300324/upload/product/3003249738pic_origin_373bb0_ars_600_600.jpg"),
     ShopItem("【女神異聞錄】P25th 含框複製畫", "",
         "https://fs1.shop123.com.tw/300324/upload/product/3003249711pic_origin_23e4fc257967_ars_600_600.jpg"),
+    ShopItem("【hololive】卡套/潤羽るしあ", "",
+        "https://fs1.shop123.com.tw/300324/upload/product/3003245851pic_origin_948d5c269667_ars_600_600.jpg"),
+    ShopItem("【hololive】卡套/兎田ぺこら", "",
+        "https://fs1.shop123.com.tw/300324/upload/product/3003245852pic_origin_99f214951812_ars_600_600.jpg"),
+    ShopItem("【出租女友（首刷限定版）", "",
+        "https://fs1.shop123.com.tw/300324/upload/standard/30032410051picture_308925.jpg"),
+    ShopItem("(角轉) 無職轉生～到了異世界就拿出真本事～（１６）", "",
+        "https://fs1.shop123.com.tw/300324/upload/product/5598pic_big_name_654200.jpeg"),
+    ShopItem("(角轉) 異世界悠閒農家（５）", "",
+        "https://fs1.shop123.com.tw/300324/upload/product/5580pic_big_name_375486.jpeg"),
   ];
 
   @override
@@ -40,16 +50,24 @@ class _MyAppState extends State<MyApp> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Title"),
+          title: const Text("Title"),
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.login)),
+            IconButton(onPressed: () {}, icon: const Icon(Icons.login)),
           ],
         ),
-        body: Builder(builder: (context) {
+        body: LayoutBuilder(builder: (context, constrain) {
+          // Responsive decide how many items a row
+          int count = 4;
+          if (constrain.maxWidth < 992) {
+            count = 3;
+          } else if (constrain.maxWidth < 576) {
+            count = 2;
+          }
           return MasonryGridView.count(
-            crossAxisCount: 2,
-            itemCount: items.length,
+            crossAxisCount: count,
+            itemCount: null, // Let Scroll View Infinity
             itemBuilder: (context, index) {
+              ShopItem item = items[index % items.length];
               return Card(
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 shape: const RoundedRectangleBorder(
@@ -60,10 +78,10 @@ class _MyAppState extends State<MyApp> {
                   child: Column(
                     children: [
                       Image.network(
-                        items[index].imageUrl,
+                        item.imageUrl,
                         fit: BoxFit.cover,
                       ),
-                      Text(items[index].name)
+                      Text(item.name)
                     ],
                   ),
                 ),
