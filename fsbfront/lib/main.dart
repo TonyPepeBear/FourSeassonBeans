@@ -53,10 +53,10 @@ class _MyAppState extends State<MyApp> {
               return Card(
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(32.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
                       Image.network(
