@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
@@ -50,14 +51,21 @@ class _MyAppState extends State<MyApp> {
             itemCount: items.length,
             itemBuilder: (context, index) {
               return Card(
-                child: Column(
-                  children: [
-                    Image.network(
-                      items[index].imageUrl,
-                      fit: BoxFit.cover,
-                    ),
-                    Text(items[index].name)
-                  ],
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(32.0),
+                  child: Column(
+                    children: [
+                      Image.network(
+                        items[index].imageUrl,
+                        fit: BoxFit.cover,
+                      ),
+                      Text(items[index].name)
+                    ],
+                  ),
                 ),
               );
             },
