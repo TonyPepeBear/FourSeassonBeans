@@ -89,6 +89,10 @@ class _MyAppState extends State<MyApp> {
             },
           );
         }),
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.shopping_cart),
+          onPressed: () {},
+        ),
       ),
     );
   }
