@@ -58,7 +58,7 @@ class _MyAppState extends State<MyApp> {
         body: LayoutBuilder(builder: (context, constrain) {
           // Responsive decide how many items a row
           int count = 4;
-          if (constrain.maxWidth < 992) {
+          if (constrain.maxWidth >= 576 && constrain.maxWidth < 992) {
             count = 3;
           } else if (constrain.maxWidth < 576) {
             count = 2;
