@@ -40,6 +40,8 @@ class _MyAppState extends State<MyApp> {
         "https://fs1.shop123.com.tw/300324/upload/product/5598pic_big_name_654200.jpeg"),
     ShopItem("(角轉) 異世界悠閒農家（５）", "",
         "https://fs1.shop123.com.tw/300324/upload/product/5580pic_big_name_375486.jpeg"),
+    ShopItem("【DVD】ひきこもりでも旅がしたい! Vol.4", "",
+            "https://fs1.shop123.com.tw/300324/upload/product/3003249444pic_outside_439913.jpg"),
   ];
 
   @override
