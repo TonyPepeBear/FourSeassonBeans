@@ -42,6 +42,10 @@ class _MyAppState extends State<MyApp> {
         "https://fs1.shop123.com.tw/300324/upload/product/5580pic_big_name_375486.jpeg"),
     ShopItem("【DVD】ひきこもりでも旅がしたい! Vol.4", "",
             "https://fs1.shop123.com.tw/300324/upload/product/3003249444pic_outside_439913.jpg"),
+    ShopItem("【CD】プロジェクトセカイ カラフルステージ! feat.初音ミク/Vivid BAD SQUAD RAD DOGS/シネマ", "",
+            "https://fs1.shop123.com.tw/300324/upload/product/3003248550pic_outside_c4feae938755.jpg"),
+    ShopItem("【CD】Paradox Live 1st album “TRAP”", "",
+            "https://fs1.shop123.com.tw/300324/upload/product/3003249232pic_outside_702116.jpg"),
   ];
 
   @override
