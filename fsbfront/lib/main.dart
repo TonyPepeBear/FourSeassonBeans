@@ -50,7 +50,7 @@ class _MyAppState extends State<MyApp> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text("Title"),
+          title: const Text("頂樓有點冷 教授我好怕"),
           actions: [
             IconButton(onPressed: () {}, icon: const Icon(Icons.login)),
           ],
