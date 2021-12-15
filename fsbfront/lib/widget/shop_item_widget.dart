@@ -29,6 +29,9 @@ class ShopItemWidget extends StatelessWidget {
                 )
               ],
             ),
+            actions: const [
+              AddToCartButton(),
+            ],
           ),
         );
       },
@@ -51,6 +54,24 @@ class ShopItemWidget extends StatelessWidget {
               Text(item.name)
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class AddToCartButton extends StatelessWidget {
+  const AddToCartButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {},
+      child: Card(
+        color: Theme.of(context).primaryColor,
+        child: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text("加入購物車"),
         ),
       ),
     );
