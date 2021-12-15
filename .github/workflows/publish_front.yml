@@ -19,10 +19,8 @@ jobs:
           flutter pub get
           flutter build web
       - name: Deploy to GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v2
+        uses: JamesIves/github-pages-deploy-action@4.1.7
         with:
-          target_branch: gh-pages
-          build_dir: ./fsbfront/build/web
-          fqdn: fsb.tonypepe.com
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          folder: ./fsbfront/build/web
+          
