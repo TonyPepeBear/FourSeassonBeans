@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:fsbfront/data/shop_item.dart';
+import 'package:fsbfront/widget/shop_item_widget.dart';
 
 void main() {
   setUrlStrategy(PathUrlStrategy());
@@ -68,24 +69,7 @@ class _MyAppState extends State<MyApp> {
             itemCount: null, // Let Scroll View Infinity
             itemBuilder: (context, index) {
               ShopItem item = items[index % items.length];
-              return Card(
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children: [
-                      Image.network(
-                        item.imageUrl,
-                        fit: BoxFit.cover,
-                      ),
-                      Text(item.name)
-                    ],
-                  ),
-                ),
-              );
+              return ShopItemWidget(item);
             },
           );
         }),
