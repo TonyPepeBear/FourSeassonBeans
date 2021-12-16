@@ -1,37 +1,67 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:fsbfront/data/shop_item.dart';
 
 class ShopItemWidget extends StatelessWidget {
-  const ShopItemWidget(this.item, {Key? key}) : super(key: key);
+  final void Function(bool opacity)? setOpacity;
+
+  const ShopItemWidget(
+      {required this.item, Key? key, required this.index, this.setOpacity})
+      : super(key: key);
   final ShopItem item;
+  final int index;
   final String itemImageHeroTag = "ITEM_IMAGE_HERO_TAG";
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            content: Wrap(
-              children: [
-                Column(
+        if (setOpacity != null) setOpacity!(true);
+        Navigator.of(context).push(
+          PageRouteBuilder(
+            opaque: false,
+            transitionsBuilder: (context, a, __, child) => FadeTransition(
+              opacity: a,
+              child: child,
+            ),
+            barrierDismissible: true,
+            transitionDuration: const Duration(milliseconds: 500),
+            reverseTransitionDuration: const Duration(milliseconds: 500),
+            pageBuilder: (context, _, __) {
+              return Scaffold(
+                backgroundColor: Colors.transparent,
+                body: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox.fromSize(
-                      size: const Size(300, 300),
-                      child: Hero(
-                        tag: itemImageHeroTag,
-                        child: Image.network(item.imageUrl),
+                    Container(
+                      width: double.infinity,
+                      color: Theme.of(context).primaryColor,
+                      child: Row(
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                if (setOpacity != null) setOpacity!(false);
+                                Navigator.pop(context);
+                              },
+                              icon: const Icon(Icons.close))
+                        ],
                       ),
                     ),
-                    Text(item.name),
+                    Hero(
+                      tag: itemImageHeroTag + index.toString(),
+                      child: Image.network(
+                        item.imageUrl,
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
+                    const Align(
+                        alignment: Alignment.topRight,
+                        child: AddToCartButton()),
                   ],
-                )
-              ],
-            ),
-            actions: const [
-              AddToCartButton(),
-            ],
+                ),
+              );
+            },
           ),
         );
       },
@@ -45,7 +75,7 @@ class ShopItemWidget extends StatelessWidget {
           child: Column(
             children: [
               Hero(
-                tag: itemImageHeroTag,
+                tag: itemImageHeroTag + index.toString(),
                 child: Image.network(
                   item.imageUrl,
                   fit: BoxFit.cover,

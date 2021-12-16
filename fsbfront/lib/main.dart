@@ -42,22 +42,34 @@ class _MyAppState extends State<MyApp> {
     ShopItem("(角轉) 異世界悠閒農家（５）", "",
         "https://fs1.shop123.com.tw/300324/upload/product/5580pic_big_name_375486.jpeg"),
     ShopItem("【DVD】ひきこもりでも旅がしたい! Vol.4", "",
-            "https://fs1.shop123.com.tw/300324/upload/product/3003249444pic_outside_439913.jpg"),
-    ShopItem("【CD】プロジェクトセカイ カラフルステージ! feat.初音ミク/Vivid BAD SQUAD RAD DOGS/シネマ", "",
-            "https://fs1.shop123.com.tw/300324/upload/product/3003248550pic_outside_c4feae938755.jpg"),
+        "https://fs1.shop123.com.tw/300324/upload/product/3003249444pic_outside_439913.jpg"),
+    ShopItem(
+        "【CD】プロジェクトセカイ カラフルステージ! feat.初音ミク/Vivid BAD SQUAD RAD DOGS/シネマ",
+        "",
+        "https://fs1.shop123.com.tw/300324/upload/product/3003248550pic_outside_c4feae938755.jpg"),
     ShopItem("【CD】Paradox Live 1st album “TRAP”", "",
-            "https://fs1.shop123.com.tw/300324/upload/product/3003249232pic_outside_702116.jpg"),
+        "https://fs1.shop123.com.tw/300324/upload/product/3003249232pic_outside_702116.jpg"),
     ShopItem("【文豪Stray Dogs】DEAD APPLE趴姿布偶吊飾 (隨機單抽)", "",
-            "https://fs1.shop123.com.tw/300324/upload/product/3003249385pic_outside_989897.jpg"),
+        "https://fs1.shop123.com.tw/300324/upload/product/3003249385pic_outside_989897.jpg"),
     ShopItem("【DVD】ひきこもりでもLIVEがしたい！～すーぱーまふまふわーるど2019", "",
-            "https://fs1.shop123.com.tw/300324/upload/product/3003249434pic_outside_661858.jpg"),
-    ShopItem("【BD】【催眠麥克風】ヒプノシスマイク-Division Rap Battle- Rhyme Anima 4 完全生産限定版", "",
-            "https://fs1.shop123.com.tw/300324/upload/standard/3003242883source_picture_993646.jpg"),
+        "https://fs1.shop123.com.tw/300324/upload/product/3003249434pic_outside_661858.jpg"),
+    ShopItem(
+        "【BD】【催眠麥克風】ヒプノシスマイク-Division Rap Battle- Rhyme Anima 4 完全生産限定版",
+        "",
+        "https://fs1.shop123.com.tw/300324/upload/standard/3003242883source_picture_993646.jpg"),
     ShopItem("【CD】takt op. 運命は真紅き旋律の街を 主題歌「SYMPHONIA」/中島美嘉", "",
-            "https://fs1.shop123.com.tw/300324/upload/product/3003249136pic_outside_8d7f89731316.jpg"),
+        "https://fs1.shop123.com.tw/300324/upload/product/3003249136pic_outside_8d7f89731316.jpg"),
     ShopItem("【CD】そらる/ゆめをきかせて", "",
-            "https://fs1.shop123.com.tw/300324/upload/product/3003247535pic_outside_01b3e0974174.jpg"),
+        "https://fs1.shop123.com.tw/300324/upload/product/3003247535pic_outside_01b3e0974174.jpg"),
   ];
+
+  bool isOpacity = false;
+
+  void _setOpacity(bool opacity) {
+    setState(() {
+      isOpacity = opacity;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,23 +84,30 @@ class _MyAppState extends State<MyApp> {
             IconButton(onPressed: () {}, icon: const Icon(Icons.login)),
           ],
         ),
-        body: LayoutBuilder(builder: (context, constrain) {
-          // Responsive decide how many items a row
-          int count = 4;
-          if (constrain.maxWidth >= 576 && constrain.maxWidth < 992) {
-            count = 3;
-          } else if (constrain.maxWidth < 576) {
-            count = 2;
-          }
-          return MasonryGridView.count(
-            crossAxisCount: count,
-            itemCount: null, // Let Scroll View Infinity
-            itemBuilder: (context, index) {
-              ShopItem item = items[index % items.length];
-              return ShopItemWidget(item);
-            },
-          );
-        }),
+        body: Opacity(
+          opacity: isOpacity ? 0.2 : 1,
+          child: LayoutBuilder(builder: (context, constrain) {
+            // Responsive decide how many items a row
+            int count = 4;
+            if (constrain.maxWidth >= 576 && constrain.maxWidth < 992) {
+              count = 3;
+            } else if (constrain.maxWidth < 576) {
+              count = 2;
+            }
+            return MasonryGridView.count(
+              crossAxisCount: count,
+              itemCount: null, // Let Scroll View Infinity
+              itemBuilder: (context, index) {
+                ShopItem item = items[index % items.length];
+                return ShopItemWidget(
+                  item: item,
+                  index: index,
+                  setOpacity: _setOpacity,
+                );
+              },
+            );
+          }),
+        ),
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.shopping_cart),
           onPressed: () {},
