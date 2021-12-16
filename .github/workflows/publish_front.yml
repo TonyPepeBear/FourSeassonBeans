@@ -17,7 +17,7 @@ jobs:
         working-directory: ./fsbfront
         run: |
           flutter pub get
-          flutter build web
+          flutter build web --web-renderer canvaskit
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.7
         with:
