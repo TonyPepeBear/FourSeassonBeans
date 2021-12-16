@@ -84,29 +84,38 @@ class _MyAppState extends State<MyApp> {
             IconButton(onPressed: () {}, icon: const Icon(Icons.login)),
           ],
         ),
-        body: Opacity(
-          opacity: isOpacity ? 0.2 : 1,
-          child: LayoutBuilder(builder: (context, constrain) {
-            // Responsive decide how many items a row
-            int count = 4;
-            if (constrain.maxWidth >= 576 && constrain.maxWidth < 992) {
-              count = 3;
-            } else if (constrain.maxWidth < 576) {
-              count = 2;
-            }
-            return MasonryGridView.count(
-              crossAxisCount: count,
-              itemCount: null, // Let Scroll View Infinity
-              itemBuilder: (context, index) {
-                ShopItem item = items[index % items.length];
-                return ShopItemWidget(
-                  item: item,
-                  index: index,
-                  setOpacity: _setOpacity,
-                );
-              },
-            );
-          }),
+        body: Align(
+          alignment: Alignment.topCenter,
+          child: SizedBox(
+            child: Container(
+              width: 1000,
+              child: AnimatedOpacity(
+                opacity: isOpacity ? 0.2 : 1,
+                duration: const Duration(milliseconds: 500),
+                child: LayoutBuilder(builder: (context, constrain) {
+                  // Responsive decide how many items a row
+                  int count = 4;
+                  if (constrain.maxWidth >= 576 && constrain.maxWidth < 992) {
+                    count = 3;
+                  } else if (constrain.maxWidth < 576) {
+                    count = 2;
+                  }
+                  return MasonryGridView.count(
+                    crossAxisCount: count,
+                    itemCount: null, // Let Scroll View Infinity
+                    itemBuilder: (context, index) {
+                      ShopItem item = items[index % items.length];
+                      return ShopItemWidget(
+                        item: item,
+                        index: index,
+                        setOpacity: _setOpacity,
+                      );
+                    },
+                  );
+                }),
+              ),
+            ),
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.shopping_cart),

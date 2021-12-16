@@ -31,34 +31,54 @@ class ShopItemWidget extends StatelessWidget {
             pageBuilder: (context, _, __) {
               return Scaffold(
                 backgroundColor: Colors.transparent,
-                body: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      color: Theme.of(context).primaryColor,
-                      child: Row(
+                body: Center(
+                  child: Card(
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(8))),
+                    child: SizedBox(
+                      height: 390,
+                      width: 420,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          IconButton(
-                              onPressed: () {
-                                if (setOpacity != null) setOpacity!(false);
-                                Navigator.pop(context);
-                              },
-                              icon: const Icon(Icons.close))
+                          Container(
+                            // App Bar
+                            width: double.infinity,
+                            color: Theme.of(context).primaryColor,
+                            child: Row(
+                              children: [
+                                IconButton(
+                                    onPressed: () {
+                                      if (setOpacity != null) {
+                                        setOpacity!(false);
+                                      }
+                                      Navigator.pop(context);
+                                    },
+                                    icon: const Icon(Icons.close))
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            // Image
+                            width: 300,
+                            height: 300,
+                            child: Hero(
+                              tag: itemImageHeroTag + index.toString(),
+                              child: Image.network(
+                                item.imageUrl,
+                                fit: BoxFit.scaleDown,
+                              ),
+                            ),
+                          ),
+                          const Align(
+                              //Add to cart button
+                              alignment: Alignment.topRight,
+                              child: AddToCartButton()),
                         ],
                       ),
                     ),
-                    Hero(
-                      tag: itemImageHeroTag + index.toString(),
-                      child: Image.network(
-                        item.imageUrl,
-                        fit: BoxFit.fitWidth,
-                      ),
-                    ),
-                    const Align(
-                        alignment: Alignment.topRight,
-                        child: AddToCartButton()),
-                  ],
+                  ),
                 ),
               );
             },
