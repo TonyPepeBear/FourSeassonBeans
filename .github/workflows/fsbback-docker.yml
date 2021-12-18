@@ -24,5 +24,6 @@ jobs:
     - name: Build and Push Conatainer
       working-directory: ./fsbback
       run: |
+        chmod 777 ./fsbback/gradlew
         docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/fsbback:latest . --no-cache
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/fsbback:latest
