@@ -2,8 +2,9 @@ name: publish front
 
 on:
   push:
-    branches:
-      - master
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   publish:
@@ -20,6 +21,7 @@ jobs:
           flutter build web --web-renderer html
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.7
+        if: github.event_name != 'pull_request'
         with:
           branch: gh-pages
           folder: ./fsbfront/build/web
