@@ -7,4 +7,4 @@ RUN ./gradlew installDist
 FROM openjdk
 
 COPY --from=builder /project/build/install/fsbback /project
-CMD ["/project/bin/GetCourse"]
+CMD ["/project/bin/fsbback"]
