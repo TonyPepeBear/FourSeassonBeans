@@ -12,7 +12,7 @@ object AppDatabase {
     private fun initAppDatabase() {
         if (isInit) return
         Database.connect(
-            url = "jdbc:mysql://localhost:3306/fsb",
+            url = "jdbc:mysql://db:3306/fsb",
             driver = "com.mysql.cj.jdbc.Driver",
             user = "root",
             password = "PWD",
