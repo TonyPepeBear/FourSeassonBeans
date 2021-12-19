@@ -21,9 +21,15 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     
-    - name: Build and Push Conatainer
+    - name: Build Conatainer
       working-directory: ./fsbback
       run: |
         chmod 777 gradlew
         docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/fsbback:latest . --no-cache
+
+    - name: Push Conatainer
+      working-directory: ./fsbback
+      if: github.event_name != 'pull_request'
+      run: |
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/fsbback:latest
+
