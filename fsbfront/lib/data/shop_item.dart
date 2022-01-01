@@ -22,16 +22,28 @@ class ShopItem {
 }
 
 class ShopItemModel extends ChangeNotifier {
-  List<ShopItem> list = List.empty();
+  List<ShopItem> _itemList = List.empty();
 
-  void setList(List<ShopItem> list) {
-    this.list = list;
+  List<ShopItem> get itemList => _itemList;
+
+  final List<ShopItem> _cartList = [];
+
+  List<ShopItem> get cartList => _cartList;
+
+  void setItemList(List<ShopItem> list) {
+    _itemList = list;
+    notifyListeners();
+  }
+
+  void addCartItem(ShopItem item) {
+    _cartList.add(item);
     notifyListeners();
   }
 
   ShopItemModel() {
     getAllShopItem().then((value) {
-      setList(value);
+      setItemList(value);
     });
   }
 }
+

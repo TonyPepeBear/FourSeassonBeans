@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:fsbfront/data/shop_item.dart';
 
@@ -71,10 +71,13 @@ class ShopItemWidget extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const Align(
+                          Align(
                               //Add to cart button
                               alignment: Alignment.topRight,
-                              child: AddToCartButton()),
+                              child: AddToCartButton(
+                                item: item,
+                                setOpacity: setOpacity,
+                              )),
                         ],
                       ),
                     ),
@@ -111,12 +114,22 @@ class ShopItemWidget extends StatelessWidget {
 }
 
 class AddToCartButton extends StatelessWidget {
-  const AddToCartButton({Key? key}) : super(key: key);
+  final ShopItem item;
+  final void Function(bool opacity)? setOpacity;
+
+  const AddToCartButton({Key? key, required this.item, this.setOpacity})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        context.read<ShopItemModel>().addCartItem(item);
+        if (setOpacity != null) {
+          setOpacity!(false);
+        }
+        Navigator.of(context).pop();
+      },
       child: Card(
         color: Theme.of(context).primaryColor,
         child: const Padding(
@@ -127,3 +140,4 @@ class AddToCartButton extends StatelessWidget {
     );
   }
 }
+
