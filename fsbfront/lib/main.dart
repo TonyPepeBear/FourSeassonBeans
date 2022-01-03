@@ -1,11 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:fsbfront/data/shop_item.dart';
+import 'package:fsbfront/widget/login_page.dart';
 import 'package:fsbfront/widget/shop_item_widget.dart';
 import 'package:fsbfront/widget/shopping_cart_page.dart';
 import 'package:provider/provider.dart';
@@ -50,7 +49,19 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text("頂樓有點冷 教授我好怕"),
           actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.login)),
+            Builder(builder: (context) {
+              return IconButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return LoginPage();
+                        },
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.login));
+            }),
           ],
         ),
         body: Align(
@@ -107,4 +118,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
