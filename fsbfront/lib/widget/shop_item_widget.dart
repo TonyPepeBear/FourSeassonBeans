@@ -1,7 +1,8 @@
 import 'dart:ui';
-import 'package:provider/provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:fsbfront/data/shop_item.dart';
+import 'package:provider/provider.dart';
 
 class ShopItemWidget extends StatelessWidget {
   final void Function(bool opacity)? setOpacity;
@@ -34,13 +35,13 @@ class ShopItemWidget extends StatelessWidget {
                 body: Center(
                   child: Card(
                     elevation: 10,
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8))),
                     child: SizedBox(
-                      height: 390,
                       width: 420,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Container(
                             // App Bar
@@ -69,6 +70,20 @@ class ShopItemWidget extends StatelessWidget {
                                 item.imageUrl,
                                 fit: BoxFit.scaleDown,
                               ),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              item.name,
+                              style: const TextStyle(fontSize: 25),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              item.price.toString(),
+                              style: const TextStyle(fontSize: 18),
                             ),
                           ),
                           Align(
@@ -140,4 +155,3 @@ class AddToCartButton extends StatelessWidget {
     );
   }
 }
-
