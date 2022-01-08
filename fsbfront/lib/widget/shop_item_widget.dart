@@ -87,12 +87,13 @@ class ShopItemWidget extends StatelessWidget {
                             ),
                           ),
                           Align(
-                              //Add to cart button
-                              alignment: Alignment.topRight,
-                              child: AddToCartButton(
-                                item: item,
-                                setOpacity: setOpacity,
-                              )),
+                            //Add to cart button
+                            alignment: Alignment.topRight,
+                            child: AddToCartButton(
+                              item: item,
+                              setOpacity: setOpacity,
+                            ),
+                          ),
                         ],
                       ),
                     ),

@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
+import 'package:fsbfront/data/login_model.dart';
 import 'package:fsbfront/data/shop_item.dart';
 import 'package:fsbfront/widget/login_page.dart';
 import 'package:fsbfront/widget/shop_item_widget.dart';
@@ -17,6 +18,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider<ShopItemModel>(create: (_) => ShopItemModel()),
+        ChangeNotifierProvider<LoginModel>(create: (_) => LoginModel()),
       ],
       child: const MyApp(),
     ),
@@ -67,7 +69,7 @@ class _MyAppState extends State<MyApp> {
         body: Align(
           alignment: Alignment.topCenter,
           child: SizedBox(
-            child: Container(
+            child: SizedBox(
               width: 1000,
               child: AnimatedOpacity(
                 opacity: isOpacity ? 0.2 : 1,
